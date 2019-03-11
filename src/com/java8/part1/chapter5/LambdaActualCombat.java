@@ -1,6 +1,6 @@
-package com.java8.chapter5;
+package com.java8.part1.chapter5;
 
-import com.java8.chapter1.vo.Apple;
+import com.java8.part1.chapter1.vo.Apple;
 
 import java.util.ArrayList;
 import java.util.Comparator;

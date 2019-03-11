@@ -1,16 +1,12 @@
-package com.java8.chapter2;
+package com.java8.part1.chapter2;
 
-import com.java8.chapter1.vo.Apple;
-import com.java8.chapter4.ConsumerExample;
-import com.java8.chapter4.LambdaExample1;
-import com.java8.chapter4.PredicateExample;
+import com.java8.part1.chapter1.vo.Apple;
+import com.java8.part1.chapter4.ConsumerExample;
+import com.java8.part1.chapter4.PredicateExample;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 
 /**

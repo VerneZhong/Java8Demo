@@ -1,4 +1,4 @@
-package com.java8.chapter3;
+package com.java8.part1.chapter3;
 
 /**
  * 匿名类谜题

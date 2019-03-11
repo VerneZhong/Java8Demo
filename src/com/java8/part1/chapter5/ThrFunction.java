@@ -1,4 +1,4 @@
-package com.java8.chapter5;
+package com.java8.part1.chapter5;
 
 /**
  * 三个参数

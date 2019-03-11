@@ -1,6 +1,6 @@
-package com.java8.chapter1;
+package com.java8.part1.chapter1;
 
-import com.java8.chapter1.vo.Apple;
+import com.java8.part1.chapter1.vo.Apple;
 
 import java.util.ArrayList;
 import java.util.List;

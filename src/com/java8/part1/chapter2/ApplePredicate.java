@@ -1,6 +1,6 @@
-package com.java8.chapter2;
+package com.java8.part1.chapter2;
 
-import com.java8.chapter1.vo.Apple;
+import com.java8.part1.chapter1.vo.Apple;
 
 /**
  * 行为参数化

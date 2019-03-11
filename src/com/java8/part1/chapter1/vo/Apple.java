@@ -1,4 +1,4 @@
-package com.java8.chapter1.vo;
+package com.java8.part1.chapter1.vo;
 
 /**
  * @author Mr.zxb

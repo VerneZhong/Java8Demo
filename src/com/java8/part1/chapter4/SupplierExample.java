@@ -1,4 +1,4 @@
-package com.java8.chapter4;
+package com.java8.part1.chapter4;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;

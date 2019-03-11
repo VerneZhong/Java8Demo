@@ -1,4 +1,4 @@
-package com.java8.chapter1;
+package com.java8.part1.chapter1;
 
 import java.io.File;
 import java.io.FileFilter;
