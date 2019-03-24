@@ -50,7 +50,28 @@ public class Dish {
         this.type = type;
     }
 
+    /**
+     * 分类
+     */
     public enum Type {
-        MEAT, FISH, OTHER;
+        // 肉食
+        MEAT,
+        // 鱼类
+        FISH,
+        // 其他
+        OTHER;
     }
+
+    /**
+     * 热量等级
+     */
+    public enum CaloricLevel {
+        // 低热量
+        DIET,
+        // 普通
+        NORMAL,
+        // 高热量
+        FAT;
+    }
+
 }
