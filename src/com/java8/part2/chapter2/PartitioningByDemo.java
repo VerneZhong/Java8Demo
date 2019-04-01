@@ -1,6 +1,7 @@
 package com.java8.part2.chapter2;
 
 import com.java8.part2.chapter1.Dish;
+import com.java8.part2.chapter3.PrimeNumberCollector;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -77,4 +78,12 @@ public class PartitioningByDemo {
         return IntStream.rangeClosed(2, n).boxed().collect(partitioningBy(PartitioningByDemo::isPrime2));
     }
 
+    /**
+     * 将数字按质数和非质数分区
+     * @param n
+     * @return
+     */
+    public static Map<Boolean, List<Integer>> primeNumberCollector(int n) {
+        return IntStream.rangeClosed(2, n).boxed().collect(new PrimeNumberCollector());
+    }
 }
