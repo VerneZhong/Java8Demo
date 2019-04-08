@@ -12,4 +12,14 @@ public class Insurance {
     public String getName() {
         return name;
     }
+
+    public Insurance setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
