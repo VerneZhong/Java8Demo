@@ -1,4 +1,4 @@
-package com.java8.part7.future;
+package com.java8.part7.completablefuture;
 
 import java.util.concurrent.*;
 

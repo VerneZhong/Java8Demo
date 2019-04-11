@@ -1,7 +1,6 @@
-package com.java8.part7.future;
+package com.java8.part7.completablefuture;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 /**
  * @author Mr.zxb
@@ -11,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Shop shop = new Shop();
+        Shop shop = new Shop("test");
 
         long start = System.nanoTime();
 
@@ -38,4 +37,5 @@ public class Main {
         long retrievalTime = (System.nanoTime() - start) / 1_000_000;
         System.out.println("retrievalTime = " + retrievalTime + " msecs");
     }
+
 }
