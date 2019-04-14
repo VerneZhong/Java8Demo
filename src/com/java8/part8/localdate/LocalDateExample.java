@@ -3,8 +3,11 @@ package com.java8.part8.localdate;
 import org.junit.Test;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 
 /**
  * @author Mr.zxb
@@ -97,5 +100,55 @@ public class LocalDateExample {
         Period twoYearsSixMonthsOneDay = Period.of(2, 6, 1);
     }
 
+    @Test
+    public void test6() {
+        // 以比较直观的方式操作LocalDate属性
+        LocalDate date1 = LocalDate.of(2014, 3, 18);
 
+        // 修改年份， 2011-03-18
+        LocalDate date2 = date1.withYear(2011);
+
+        // 修改为25号，2011-03-25
+        LocalDate date3 = date2.withDayOfMonth(25);
+
+        // 修改为9月，2011-09-25
+        LocalDate date4 = date3.with(ChronoField.MONTH_OF_YEAR, 9);
+    }
+
+    @Test
+    public void test7() {
+        // 以相对方式修改LocalDate对象属性
+        LocalDate date = LocalDate.of(2014, 3, 18);
+        // 增加一周， 2014-03-25
+        LocalDate date2 = date.plusWeeks(1);
+        // 减少3年，2011-03-25
+        LocalDate date3 = date2.minusYears(3);
+        // 增加6个月，2011-09-25
+        LocalDate date4 = date3.plus(6, ChronoUnit.MONTHS);
+    }
+
+    @Test
+    public void test8() {
+        // 初始化，2014-03-18
+        LocalDate date1 = LocalDate.of(2014, 3, 18);
+        // 2014-09-18
+        date1 = date1.with(ChronoField.MONTH_OF_YEAR, 9);
+        // 2016-09-08
+        date1 = date1.plusYears(2).minusDays(10);
+        //
+        date1.withYear(2011);
+
+        System.out.println(date1.format(DateTimeFormatter.BASIC_ISO_DATE));
+    }
+
+    @Test
+    public void test9() {
+        // 使用预定义的TemporalAdjuster
+        LocalDate date = LocalDate.of(2014, 3, 18);
+        // 2014-03-23
+        LocalDate date2 = date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+        // 2014-03-31
+        LocalDate date3 = date2.with(TemporalAdjusters.lastDayOfMonth());
+        System.out.println("date3 = " + date3.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+    }
 }
