@@ -3,11 +3,15 @@ package com.java8.part8.localdate;
 import org.junit.Test;
 
 import java.time.*;
+import java.time.chrono.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * @author Mr.zxb
@@ -150,5 +154,114 @@ public class LocalDateExample {
         // 2014-03-31
         LocalDate date3 = date2.with(TemporalAdjusters.lastDayOfMonth());
         System.out.println("date3 = " + date3.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+    }
+
+    @Test
+    public void test10() {
+        // 打印输出及解析日期-时间对象
+        LocalDate date = LocalDate.of(2014, 3, 18);
+        String s1 = date.format(DateTimeFormatter.BASIC_ISO_DATE);
+        String s2 = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
+
+        // 字符串解析成日期对象
+        LocalDate date2 = LocalDate.parse(s1, DateTimeFormatter.BASIC_ISO_DATE);
+        LocalDate date3 = LocalDate.parse(s2, DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    @Test
+    public void test11() {
+        // 按照某个模式创建DateTimeFormatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date1 = LocalDate.of(2014, 3, 18);
+        String format = date1.format(formatter);
+        LocalDate date2 = LocalDate.parse(format, formatter);
+    }
+
+    @Test
+    public void test12() {
+        // 创建一个意大利的DateTimeFormatter
+        DateTimeFormatter italianFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.CHINA);
+        LocalDate date1 = LocalDate.of(2014, 3, 18);
+        String format = date1.format(italianFormatter);
+        LocalDate date2 = LocalDate.parse(format, italianFormatter);
+        System.out.println(format);
+    }
+
+    @Test
+    public void test13() {
+        // 构造一个DateTimeFormatter对象
+        DateTimeFormatter formatterBuilder = new DateTimeFormatterBuilder()
+                .appendText(ChronoField.YEAR)
+                .appendLiteral("年")
+                .appendText(ChronoField.MONTH_OF_YEAR)
+                .appendText(ChronoField.DAY_OF_MONTH)
+                .appendLiteral("号")
+                .parseCaseInsensitive()
+                .toFormatter(Locale.CHINA);
+
+        System.out.println(LocalDate.now().format(formatterBuilder));
+    }
+
+    @Test
+    public void test14() {
+        // 为时间添加时区信息
+        ZoneId shangHai = ZoneId.of("Asia/Shanghai");
+//        ZoneId zoneId = TimeZone.getDefault().toZoneId();
+
+        LocalDate date = LocalDate.now();
+        // LocalDate转带时区信息的ZonedDateTime
+        ZonedDateTime localDateTime = date.atStartOfDay(shangHai);
+
+        LocalDateTime now = LocalDateTime.now();
+        // LocalDateTime转带时区信息的ZonedDateTime
+        ZonedDateTime zonedDateTime = now.atZone(shangHai);
+
+        Instant instant = Instant.now();
+        // Instant转带时区信息的ZonedDateTime
+        ZonedDateTime zonedDateTime1 = instant.atZone(shangHai);
+
+        // 通过ZoneOffset还可以将LocalDateTime转成Instant
+        ZoneOffset zoneOffset = ZoneOffset.of("Asia/Shanghai");
+        Instant instant1 = now.toInstant(zoneOffset);
+
+        // 还可以通过Instant转成LocalDateTime
+        Instant instant2 = Instant.now();
+        LocalDateTime localDateTime1 = LocalDateTime.ofInstant(instant2, shangHai);
+
+        // 利用UTC/格林尼治时间的固定偏差计算时间
+        // 纽约落后于伦敦5小时
+        ZoneOffset newYorkOffset = ZoneOffset.of("-5:00");
+        // ZoneOffset并不考虑日光时的影响
+
+        // ISO-8601的历法系统
+        LocalDateTime now1 = LocalDateTime.now();
+        OffsetDateTime offsetDateTime = OffsetDateTime.of(now1, newYorkOffset);
+    }
+
+    @Test
+    public void test15() {
+        // 使用别的日历系统
+        LocalDate date = LocalDate.now();
+        // 日本时间
+        JapaneseDate japaneseDate = JapaneseDate.from(date);
+
+        // 民国时间
+        MinguoDate minguoDate = MinguoDate.from(date);
+
+        // 可以为某个Locale显示的创建日历系统，接着创建该Locale对应的日期的实例
+        Chronology chronology = Chronology.ofLocale(Locale.TAIWAN);
+        ChronoLocalDate now = chronology.dateNow();
+
+        // 伊斯兰教日历
+        // 斋月日期
+        HijrahDate ramadanDate = HijrahDate.now().with(ChronoField.DAY_OF_MONTH, 1)
+                // 取的当前的Hijrah日期，紧接着对其进行修正，得到斋月的第一天，即第9个月
+                .with(ChronoField.MONTH_OF_YEAR, 9);
+        System.out.println("Ramadan starts on " +
+                // IsoChronology.INSTANCE是IsoChronology的静态实例
+                IsoChronology.INSTANCE.date(ramadanDate) +
+                " and ends on " +
+                // 斋月始于2014-06-28，止于2014-07-27
+                IsoChronology.INSTANCE.date(ramadanDate.with(TemporalAdjusters.lastDayOfMonth())));
     }
 }
