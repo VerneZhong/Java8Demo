@@ -1,8 +1,11 @@
 package com.java8.part9.functional;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.DoubleUnaryOperator;
 import java.util.stream.LongStream;
 
 /**
@@ -98,5 +101,40 @@ public class FunctionalProgramming {
      */
     static long factorialHelper(long acc, long n) {
         return n == 1 ? acc : factorialHelper(acc * n, n - 1);
+    }
+
+    /**
+     * 科里化是一种将具备2个参数（比如，x和y）的函数f转化为使用一个参数的函数g，并且这个函数的返回值也是一个函数，
+     * 它作为新函数的一个参数。
+     * 单位转换通常都会涉及转换因子以及基线调整因子的问题
+     * 将摄氏度转换到华氏度的公式是CtoF(X) = X * 9 / 5 + 32.
+     * @param x
+     * @param f 转换因子
+     * @param b 基线值
+     * @return
+     */
+    static double converter(double x, double f, double b) {
+        return x * f + b;
+    }
+
+    /**
+     * 工厂方法，
+     * @param f
+     * @param b
+     * @return
+     */
+    static DoubleUnaryOperator curriedConverter(double f, double b) {
+        return x -> x * f + b;
+    }
+
+    @Test
+    public void test() {
+        // 自由组合
+        DoubleUnaryOperator convertCtoF = curriedConverter(9.0 / 5, 32);
+        DoubleUnaryOperator convertUSDtoGBP = curriedConverter(0.6, 0);
+        DoubleUnaryOperator convertKmtoMi = curriedConverter(0.6214, 0);
+
+        double gbp = convertUSDtoGBP.applyAsDouble(1000);
+        System.out.println(gbp);
     }
 }
