@@ -20,7 +20,7 @@ public class TypeAnnotation {
 
         System.out.println(name);
 
-        List<@NonNull Book> books = new ArrayList<>();
+        List<Book> books = new ArrayList<>();
 
         books.add(null);
 

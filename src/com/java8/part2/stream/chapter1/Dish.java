@@ -1,9 +1,14 @@
 package com.java8.part2.stream.chapter1;
 
+import lombok.Data;
+import lombok.ToString;
+
 /**
  * @author Mr.zxb
  * @date 2019-03-08 20:45:47
  */
+@ToString
+@Data
 public class Dish {
 
     private String name;
@@ -15,38 +20,6 @@ public class Dish {
         this.name = name;
         this.vegetarian = vegetarian;
         this.calories = calories;
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isVegetarian() {
-        return vegetarian;
-    }
-
-    public void setVegetarian(boolean vegetarian) {
-        this.vegetarian = vegetarian;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
-    public void setCalories(int calories) {
-        this.calories = calories;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
         this.type = type;
     }
 
